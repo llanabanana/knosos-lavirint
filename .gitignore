@@ -1,0 +1,40 @@
+# Compiled object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Visual Studio files
+.vs/
+*.vcxproj.user
+*.suo
+*.sdf
+*.opensdf
+*.opendb
+*.db
+*.ipch
+
+# Build directories
+Debug/
+Release/
+x64/
+x86/
+build/
+out/
+
+# Precompiled headers
+*.pch
+*.gch
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Documentation (PDF)
+*.pdf
+
+# Empty subdirectory artifact
+knosos_sv23_2023/
