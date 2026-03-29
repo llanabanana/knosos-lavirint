@@ -1,35 +1,34 @@
 # Knosos Lavirint
 
-A console-based labyrinth game written in C++, inspired by the myth of the Minotaur in the Labyrinth of Knossos.
+Console labyrinth game in C++, inspired by the Greek myth of the Minotaur in the Labyrinth of Knossos.
+Made as a university project (sv23-2023).
 
-## About
+## About the game
 
-The player controls a robot navigating a procedurally generated maze. The goal is to reach the exit while avoiding (or defeating) a Minotaur that roams the labyrinth. Along the way, the player can collect magical items that grant temporary abilities.
+You control a robot trying to escape a randomly generated maze. The entrance is at the
+top and the exit is at the bottom. Somewhere in the maze, a Minotaur is wandering around --
+if it catches you, you lose.
 
-### Gameplay
+Along the way you can pick up magical items that give you temporary abilities (lasting 3 turns each):
 
-- Move the robot using **WASD** keys; press **Q** to quit.
-- The maze is generated randomly with a guaranteed path from entrance (`U`) to exit (`I`), verified via flood-fill.
-- A Minotaur (`M`) wanders the maze and will chase the robot when adjacent.
-- Magical items (`P`) are scattered throughout the maze. Picking one up grants a random effect:
-  - **Magla (Fog)** -- reveals only a limited area around the robot for several turns.
-  - **Mac (Sword)** -- lets the robot destroy the Minotaur on contact.
-  - **Stit (Shield)** -- protects the robot from one Minotaur attack.
-  - **Cekic (Hammer)** -- allows the robot to break through a wall once.
-- At the end of a session the game state can be saved to a text file.
+- **Magla (Fog)** -- limits your view to a small area around you
+- **Mac (Sword)** -- lets you kill the Minotaur on contact
+- **Stit (Shield)** -- blocks one Minotaur attack
+- **Cekic (Hammer)** -- lets you break through one wall
 
-### Minimum requirements
+The maze is generated procedurally and validated using BFS flood-fill to make sure
+there is always a path from entrance to exit. At the end of the game you can save the
+maze state to a text file.
 
-- Maze dimensions: at least 15x15
-- At least 3 magical items
+## Controls
 
-## Usage
+- **WASD** to move
+- **Q** to quit
 
-```
-./knosos <rows> <columns> <items>
-```
+## How to run
 
-Example:
+The program takes 3 command-line arguments: rows, columns, and number of items.
+Minimum maze size is 15x15 with at least 3 items.
 
 ```
 ./knosos 20 25 5
@@ -37,29 +36,37 @@ Example:
 
 ## Building
 
-Open `knosos_sv23_2023.sln` in Visual Studio, or compile manually:
+### Visual Studio
+
+Open `knosos_sv23_2023.sln` and build normally.
+
+### g++ (on Windows)
 
 ```
 g++ -o knosos main.cpp Igra.cpp Lavirint.cpp GeneratorLavirinta.cpp Polje.cpp Robot.cpp Minotaur.cpp MagicniPredmeti.cpp Fajl.cpp
 ```
 
-> **Note:** The project uses `<conio.h>` (`_getch`), so it targets Windows. Porting to Linux/macOS would require replacing `_getch` with a termios-based equivalent.
+### Windows only
 
-## Project Structure
+This project uses `<conio.h>` and `_getch()` for keyboard input, so it only
+works on Windows. To port it to Linux you would need to replace those with
+a termios-based alternative.
 
-| File | Description |
+## Project structure
+
+| File | What it does |
 |------|-------------|
-| `main.cpp` | Entry point -- parses CLI arguments and starts the game |
-| `Igra.cpp/h` | Game loop and core logic (movement, item effects, win/loss conditions) |
-| `Lavirint.cpp/h` | Maze data structure, display, and coordinate helpers |
-| `GeneratorLavirinta.cpp/h` | Procedural maze generation with flood-fill path validation |
-| `Polje.cpp/h` | Single cell in the maze grid |
-| `Robot.cpp/h` | Player character with timed effect management |
-| `Minotaur.cpp/h` | Minotaur AI (random movement, adjacency detection) |
-| `MagicniPredmet.h` / `MagicniPredmeti.cpp` | Item hierarchy and effect application |
-| `Fajl.cpp/h` | Save game state to file |
-| `data/` | Data files (fog pattern, defense descriptions) |
+| `main.cpp` | Entry point, parses command-line arguments |
+| `Igra.cpp/h` | Game loop, movement logic, win/loss conditions |
+| `Lavirint.cpp/h` | Maze data structure and display |
+| `GeneratorLavirinta.cpp/h` | Maze generation with flood-fill validation |
+| `Polje.cpp/h` | Single cell in the maze |
+| `Robot.cpp/h` | Player character with timed effects |
+| `Minotaur.cpp/h` | Minotaur movement and adjacency detection |
+| `MagicniPredmet.h` / `MagicniPredmeti.cpp` | Magic item classes and effects |
+| `Fajl.cpp/h` | Saving game state to file |
+| `data/` | Runtime data files used by the game |
 
 ## Author
 
-Lana Mirkov (sv23-2023)
+Lana Mirkov

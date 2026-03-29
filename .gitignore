@@ -16,6 +16,8 @@
 *.opendb
 *.db
 *.ipch
+*.pdb
+*.ilk
 
 # Build directories
 Debug/
